@@ -23,4 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.remove('active');
         }
     });
+
+    // Smooth scroll for anchor links
+    document.getElementById('home-link').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default anchor behavior
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scroll to top
+    });
+  });
+
+  document.getElementById('contact-link').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default anchor behavior
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth' // Smooth scroll to bottom
+    });
+  });
 });
