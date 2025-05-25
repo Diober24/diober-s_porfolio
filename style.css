@@ -5,15 +5,20 @@
 }
 
 :root {
-  --header-text-color: rgb(116, 116, 116);
+  --header-text-color: rgb(82, 82, 82);
   --hover-text-color: #aa78ff;
   --text-color-black: #000000;
   --mobile-menu-bg: rgba(255, 255, 255, 0.95);
   --img-line-color: #d9c1ff;
+
+  /* Project Section */
+  --project-title-color: #282828;
+  --project-description-color: #4d4d4d;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #ffffff;
   color: #333;
   padding-top: 60px; /* space for sticky header */
@@ -179,6 +184,17 @@ nav a:hover {
   .profession p br {
     display: none;
   }
+
+  #projects h2 {
+    font-size: 2em !important;
+  }
+  #projects a {
+    font-size: 1.5em !important;
+  }
+
+    #projects p {
+        font-size: 1em !important;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -198,6 +214,10 @@ nav a:hover {
     width: 290px !important;
     height: 290px !important;
     border-width: 20px !important;
+  }
+
+  .image-wrapper {
+    height: 200px !important; /* Adjust height for smaller screens */
   }
 }
 
@@ -220,7 +240,7 @@ main {
 .profession {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 4em;
-  color: #555;
+  color: #282828;
 }
 
 .highlight {
@@ -232,7 +252,7 @@ main {
 }
 .profession p {
   font-size: 0.3em;
-  color: #777;
+  color: #626262;
   margin-top: 10px;
 }
 
@@ -267,4 +287,76 @@ section {
   margin-bottom: 50px;
   width: 100%;
   padding: 0 20px;
+}
+
+/* Project Section */
+#projects {
+    color: var(--project-title-color);
+    margin-top: 100px;
+}
+#projects h2 {
+  font-size: 4em;
+  margin-bottom: 20px;
+}
+
+#projects p {
+  font-size: 1.5em;
+  color: var(--project-description-color);
+}
+
+#projects img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper {
+  position: relative;
+  background-image: url('img/purple-bg.jpg'); /* your background image */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px; /* optional */
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  max-width: 80%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+}
+
+#projects a:hover {
+    color:#000000;
+}
+
+#projects a {
+    color: var(--project-title-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 2em;
+}
+
+.material-symbols-outlined {
+    color: #985efb;
+}
+
+#projects a:hover .material-symbols-outlined {
+  color: #EA33F7;
+  transform: scale(1.5); /* Optional pop effect */
+}
+
+.material-symbols-outlined {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.image-wrapper {
+    margin-bottom: 30px;
 }
