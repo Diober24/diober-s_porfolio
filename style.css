@@ -196,19 +196,25 @@ nav a:hover {
     font-size: 1em !important;
   }
 
-  #skills h2 {
+  #skills h2,
+  #hobbies h2,
+  #my-story h2 {
     font-size: 2em !important;
   }
 
   .skills-grid {
-     grid-template-columns: repeat(2, 1fr) !important; /* 2 equal-width columns for smaller screens */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ) !important; /* 2 equal-width columns for smaller screens */
   }
 
   #skills h3 {
     font-size: 1.2em !important;
   }
 
-  #skills .skill-item {
+  #skills .skill-item,
+  #hobbies .hobby-item {
     font-size: 1em !important;
   }
 }
@@ -241,6 +247,14 @@ nav a:hover {
 main {
   max-width: 1500px;
   margin: auto;
+}
+
+section#projects h2,
+section#skills h2,
+section#hobbies h2,
+section#my-story h2 {
+  font-size: 4em;
+  margin-bottom: 10px;
 }
 
 .home-container {
@@ -310,10 +324,6 @@ section {
   color: var(--project-title-color);
   margin-top: 100px;
 }
-#projects h2 {
-  font-size: 4em;
-  margin-bottom: 20px;
-}
 
 #projects p {
   font-size: 1.5em;
@@ -382,17 +392,13 @@ section {
   color: var(--project-title-color);
 }
 
-#skills h2 {
-  font-size: 4em;
-  margin-bottom: 10px;
-}
-
 #skills h3 {
   font-size: 2em;
   margin-bottom: 10px;
 }
 
-#skills .skill-item {
+#skills .skill-item,
+#hobbies .hobby-item {
   font-size: 1.5em;
   color: var(--project-description-color);
 }
@@ -401,11 +407,51 @@ section {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 4 equal-width columns */
   gap: 20px; /* space between grid items */
-  margin-top: 20px;
 }
 
-.skills-grid h3,
-.skills-grid .skill-item {
-  text-align: center;
-  padding: -1px;
+/* Hobbies Section */
+#hobbies {
+  color: var(--project-title-color);
+}
+
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 equal-width columns */
+  gap: 20px; /* space between grid items */
+}
+
+/* My Story Section */
+#my-story p {
+  font-size: 1.5em;
+  color: var(--project-description-color);
+}
+
+
+/* Contacts */
+#contacts h2 {
+    display: flex;
+    justify-content: center;
+}
+.contact-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+.contact-item {
+  display: flex;
+  justify-content: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin-right: 30px;
+}
+
+/* Footer */
+.footer {
+  color: var(--project-description-color);
+  text-align: end;
+  padding: 20px 0;
+  font-size: 20px;
 }
