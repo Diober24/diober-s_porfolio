@@ -198,6 +198,8 @@ nav a:hover {
 
   #skills h2,
   #hobbies h2,
+  #my-story h2,
+  #exp h2,
   #my-story h2 {
     font-size: 2em !important;
   }
@@ -213,8 +215,26 @@ nav a:hover {
     font-size: 1.2em !important;
   }
 
+  #exp h3 {
+    font-size: 1.3em !important;
+  }
+
+  #exp p,
+  #my-story p {
+    font-size: 1em !important;
+  }
+
   #skills .skill-item,
   #hobbies .hobby-item {
+    font-size: 1em !important;
+  }
+
+  #contacts svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .footer {
     font-size: 1em !important;
   }
 }
@@ -252,7 +272,8 @@ main {
 section#projects h2,
 section#skills h2,
 section#hobbies h2,
-section#my-story h2 {
+section#my-story h2,
+section#exp  h2 {
   font-size: 4em;
   margin-bottom: 10px;
 }
@@ -387,6 +408,20 @@ section {
   margin-bottom: 30px;
 }
 
+/* Experience Section */
+#exp {
+  color: var(--project-title-color);
+}
+
+#exp h3 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+#exp p {
+  font-size: 1.5em;
+  color: var(--project-description-color);
+}
+
 /* Skills Section */
 #skills {
   color: var(--project-title-color);
@@ -445,7 +480,8 @@ section {
 .social-links {
   display: flex;
   justify-content: center;
-  margin-right: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Footer */
