@@ -138,7 +138,7 @@ nav a:hover {
   }
 
   section#home {
-    margin-top: -200px;
+    margin-top: -100px;
     margin-right: 0;
     /* text-align: center; */
     margin-bottom: 30px;
@@ -152,6 +152,10 @@ nav a:hover {
   .profile-wrapper img {
     width: 230px;
     border-width: 15px;
+  }
+
+  .home-container .profession {
+    font-size: 2em;
   }
 }
 
@@ -173,8 +177,9 @@ nav a:hover {
   }
 
   .profile-wrapper img {
-    width: 180px;
-    border-width: 12px;
+    width: 290px !important;
+    height: 290px !important;
+    border-width: 20px !important; 
   }
 }
 
