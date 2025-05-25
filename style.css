@@ -192,9 +192,25 @@ nav a:hover {
     font-size: 1.5em !important;
   }
 
-    #projects p {
-        font-size: 1em !important;
-    }
+  #projects p {
+    font-size: 1em !important;
+  }
+
+  #skills h2 {
+    font-size: 2em !important;
+  }
+
+  .skills-grid {
+     grid-template-columns: repeat(2, 1fr) !important; /* 2 equal-width columns for smaller screens */
+  }
+
+  #skills h3 {
+    font-size: 1.2em !important;
+  }
+
+  #skills .skill-item {
+    font-size: 1em !important;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -291,8 +307,8 @@ section {
 
 /* Project Section */
 #projects {
-    color: var(--project-title-color);
-    margin-top: 100px;
+  color: var(--project-title-color);
+  margin-top: 100px;
 }
 #projects h2 {
   font-size: 4em;
@@ -313,7 +329,7 @@ section {
 
 .image-wrapper {
   position: relative;
-  background-image: url('img/purple-bg.jpg'); /* your background image */
+  background-image: url("img/purple-bg.jpg"); /* your background image */
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -333,23 +349,23 @@ section {
 }
 
 #projects a:hover {
-    color:#000000;
+  color: #000000;
 }
 
 #projects a {
-    color: var(--project-title-color);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    font-size: 2em;
+  color: var(--project-title-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: 2em;
 }
 
 .material-symbols-outlined {
-    color: #985efb;
+  color: #985efb;
 }
 
 #projects a:hover .material-symbols-outlined {
-  color: #EA33F7;
+  color: #ea33f7;
   transform: scale(1.5); /* Optional pop effect */
 }
 
@@ -358,5 +374,38 @@ section {
 }
 
 .image-wrapper {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+/* Skills Section */
+#skills {
+  color: var(--project-title-color);
+}
+
+#skills h2 {
+  font-size: 4em;
+  margin-bottom: 10px;
+}
+
+#skills h3 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+#skills .skill-item {
+  font-size: 1.5em;
+  color: var(--project-description-color);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 equal-width columns */
+  gap: 20px; /* space between grid items */
+  margin-top: 20px;
+}
+
+.skills-grid h3,
+.skills-grid .skill-item {
+  text-align: center;
+  padding: -1px;
 }
