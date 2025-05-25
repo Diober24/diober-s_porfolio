@@ -9,7 +9,7 @@
   --hover-text-color: #aa78ff;
   --text-color-black: #000000;
   --mobile-menu-bg: rgba(255, 255, 255, 0.95);
-  --img-line-color: #b4b4b4;
+  --img-line-color: #d9c1ff;
 }
 
 body {
@@ -19,6 +19,8 @@ body {
   padding-top: 60px; /* space for sticky header */
   line-height: 1.6;
   overflow-x: hidden;
+  margin-left: 40px; /* Center the content */
+  margin-right: 40px; /* Center the content */
 }
 
 /* Sticky header styles */
@@ -36,7 +38,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 2000px;
+  max-width: 1450px;
   margin: 0 auto;
   position: relative;
 }
@@ -93,6 +95,11 @@ nav a:hover {
     padding: 10px 15px;
   }
 
+  body {
+    margin-left: 20px; /* Adjust margins for smaller screens */
+    margin-right: 20px; /* Adjust margins for smaller screens */
+  }
+
   .menu-toggle {
     display: block;
   }
@@ -137,8 +144,11 @@ nav a:hover {
     align-items: center;
   }
 
+  .home-container {
+    margin-top: -10px !important;
+  }
+
   section#home {
-    margin-top: -100px;
     margin-right: 0;
     /* text-align: center; */
     margin-bottom: 30px;
@@ -157,6 +167,18 @@ nav a:hover {
   .home-container .profession {
     font-size: 2em;
   }
+
+  .front-end {
+    margin-bottom: -20px !important;
+  }
+
+  .profession p {
+    font-size: 0.5em !important;
+  }
+
+  .profession p br {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -168,10 +190,6 @@ nav a:hover {
     width: 85%;
   }
 
-  body {
-    padding-top: 50px;
-  }
-
   .profile-wrapper {
     max-width: 200px;
   }
@@ -179,7 +197,7 @@ nav a:hover {
   .profile-wrapper img {
     width: 290px !important;
     height: 290px !important;
-    border-width: 20px !important; 
+    border-width: 20px !important;
   }
 }
 
@@ -194,25 +212,37 @@ main {
   align-items: flex-start;
   justify-content: space-between;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 100px;
   position: relative;
+  cursor: default;
 }
 
 .profession {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 3em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 4em;
   color: #555;
 }
 
+.highlight {
+  color: var(--hover-text-color);
+}
+
+.front-end {
+  margin-bottom: -60px;
+}
 .profession p {
-    font-size: 0.5em;
-    color: #777;
-    margin-top: 10px;
+  font-size: 0.3em;
+  color: #777;
+  margin-top: 10px;
 }
 
 section#home {
   flex: 1;
   min-width: 300px;
+}
+
+#home {
+  margin-top: 60px;
 }
 
 .profile-wrapper {
