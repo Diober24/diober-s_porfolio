@@ -54,37 +54,36 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Fetch and load page content
- function loadPage(page) {
-  // Step 1: Animate out the current content
-  content.classList.remove("show");
+  function loadPage(page) {
+    // Step 1: Animate out the current content
+    content.classList.remove("show");
 
-  // Step 2: Wait for the transition to finish (e.g. 500ms)
-  setTimeout(() => {
-    fetch(page)
-      .then((res) => {
-        if (!res.ok) throw new Error("Page not found");
-        return res.text();
-      })
-      .then((html) => {
-        // Step 3: Insert the new content
-        content.innerHTML = html;
+    // Step 2: Wait for the transition to finish (e.g. 500ms)
+    setTimeout(() => {
+      fetch(page)
+        .then((res) => {
+          if (!res.ok) throw new Error("Page not found");
+          return res.text();
+        })
+        .then((html) => {
+          // Step 3: Insert the new content
+          content.innerHTML = html;
 
-        // Step 4: Animate in the new content
-        requestAnimationFrame(() => {
+          // Step 4: Animate in the new content
+          requestAnimationFrame(() => {
+            content.classList.add("show");
+
+            // Step 5: Scroll to top after a short delay to ensure visibility
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }, 50); // slight delay for smoother animation experience
+          });
+        })
+        .catch(() => {
+          content.innerHTML = "<p>Page not found.</p>";
           content.classList.add("show");
-
-          // Step 5: Scroll to top after a short delay to ensure visibility
-          setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }, 50); // slight delay for smoother animation experience
+          window.scrollTo({ top: 0, behavior: "smooth" }); // scroll even if error
         });
-      })
-      .catch(() => {
-        content.innerHTML = "<p>Page not found.</p>";
-        content.classList.add("show");
-        window.scrollTo({ top: 0, behavior: "smooth" }); // scroll even if error
-      });
-  }, 500); // match your CSS transition time
-}
-
+    }, 500); // match your CSS transition time
+  }
 });
