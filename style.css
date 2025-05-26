@@ -461,8 +461,13 @@ section {
   color: var(--project-description-color);
 }
 
+#my-story {
+  margin-bottom: 200px;
+}
+
 
 /* Contacts */
+
 #contacts h2 {
     display: flex;
     justify-content: center;
@@ -487,12 +492,13 @@ section {
 /* Footer */
 footer {
   color: var(--project-description-color);
-  margin-bottom: 30px;
+  max-width: 1500px;
+  margin: auto;
+  margin-top: 30px;
   text-align: end;
   padding: 20px 0;
   font-size: 20px;
 }
-
 
 /* Content Animation */
 /* Initial state for content: hidden and shifted */

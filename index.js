@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Fetch and load page content
-  function loadPage(page) {
+ function loadPage(page) {
   // Step 1: Animate out the current content
   content.classList.remove("show");
 
@@ -72,14 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Step 4: Animate in the new content
         requestAnimationFrame(() => {
           content.classList.add("show");
+
+          // Step 5: Scroll to top after a short delay to ensure visibility
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 50); // slight delay for smoother animation experience
         });
       })
       .catch(() => {
         content.innerHTML = "<p>Page not found.</p>";
         content.classList.add("show");
+        window.scrollTo({ top: 0, behavior: "smooth" }); // scroll even if error
       });
-  }, 500); // Match this with your CSS transition duration
+  }, 500); // match your CSS transition time
 }
-
 
 });
