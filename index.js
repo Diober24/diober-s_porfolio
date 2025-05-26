@@ -1,43 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector("nav");
+  const content = document.getElementById("content");
 
-    // Toggle mobile menu
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        nav.classList.toggle('active');
+  // Toggle mobile menu
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    nav.classList.toggle("active");
+  });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll("nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuToggle.classList.remove("active");
+      nav.classList.remove("active");
     });
+  });
 
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            nav.classList.remove('active');
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      !nav.contains(e.target) &&
+      !menuToggle.contains(e.target) &&
+      nav.classList.contains("active")
+    ) {
+      menuToggle.classList.remove("active");
+      nav.classList.remove("active");
+    }
+  });
+
+  // Optional: smooth scroll for specific IDs if you have those in nav links
+  // If you don’t have #home-link or #contact-link in your HTML, remove these blocks.
+  const homeLink = document.getElementById("home-link");
+  if (homeLink) {
+    homeLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Load default section
+  loadPage("pages/home.html");
+
+  // Attach click events to nav links (use data-page attribute)
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const page = link.getAttribute("data-page");
+      if (page) {
+        loadPage(page);
+      }
+    });
+  });
+
+  // Fetch and load page content
+  function loadPage(page) {
+  // Step 1: Animate out the current content
+  content.classList.remove("show");
+
+  // Step 2: Wait for the transition to finish (e.g. 500ms)
+  setTimeout(() => {
+    fetch(page)
+      .then((res) => {
+        if (!res.ok) throw new Error("Page not found");
+        return res.text();
+      })
+      .then((html) => {
+        // Step 3: Insert the new content
+        content.innerHTML = html;
+
+        // Step 4: Animate in the new content
+        requestAnimationFrame(() => {
+          content.classList.add("show");
         });
-    });
+      })
+      .catch(() => {
+        content.innerHTML = "<p>Page not found.</p>";
+        content.classList.add("show");
+      });
+  }, 500); // Match this with your CSS transition duration
+}
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) {
-            menuToggle.classList.remove('active');
-            nav.classList.remove('active');
-        }
-    });
 
-    // Smooth scroll for anchor links
-    document.getElementById('home-link').addEventListener('click', function (e) {
-    e.preventDefault(); // Prevent default anchor behavior
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // Smooth scroll to top
-    });
-  });
-
-  document.getElementById('contact-link').addEventListener('click', function (e) {
-    e.preventDefault(); // Prevent default anchor behavior
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth' // Smooth scroll to bottom
-    });
-  });
 });

@@ -234,8 +234,8 @@ nav a:hover {
     height: 30px;
   }
 
-  .footer {
-    font-size: 1em !important;
+  footer {
+    font-size: 0.8em !important;
   }
 }
 
@@ -485,9 +485,25 @@ section {
 }
 
 /* Footer */
-.footer {
+footer {
   color: var(--project-description-color);
+  margin-bottom: 30px;
   text-align: end;
   padding: 20px 0;
   font-size: 20px;
+}
+
+
+/* Content Animation */
+/* Initial state for content: hidden and shifted */
+#content {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Active state: fully visible and at original position */
+#content.show {
+  opacity: 1;
+  transform: translateX(0);
 }
