@@ -59,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch and load page content
   function loadPage(page) {
+    console.log('Attempting to load:', page); // Add debugging
+
     // Step 1: Animate out the current content
     content.classList.remove("show");
 
@@ -66,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       fetch(page)
         .then((res) => {
+          console.log('Fetch response:', res.status); // Add debugging
           if (!res.ok) throw new Error("Page not found");
           return res.text();
         })
@@ -113,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
               link.addEventListener("click", (e) => {
                 e.preventDefault();
                 const nextPage = link.getAttribute("data-page");
+                console.log('Link clicked, page:', page); // Add debugging
                 if (nextPage) {
                   loadPage(nextPage);
                 }
@@ -127,7 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           });
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error('Load error:', error); // Add debugging
           content.innerHTML = "<p>Page not found.</p>";
           content.classList.add("show");
           window.scrollTo({ top: 0, behavior: "smooth" }); // scroll even if error
