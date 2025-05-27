@@ -250,7 +250,7 @@ nav a:hover {
   footer {
     font-size: 0.8em !important;
   }
- 
+
   .details-container {
     flex-direction: column;
   }
@@ -258,7 +258,7 @@ nav a:hover {
   #about {
     order: 2;
   }
-  
+
   .project-details {
     order: 1;
     padding: 20px;
@@ -286,9 +286,11 @@ nav a:hover {
     border-width: 20px !important;
   }
 
+  .project-container .image-wrapper {
+    padding: 20px !important;
+  }
   .project-container .image-wrapper img {
-    padding: 7px !important;
-    border-radius: 26px !important;
+    border-radius: 5px !important;
   }
 
   .image-container {
@@ -296,7 +298,6 @@ nav a:hover {
     grid-template-columns: repeat(1, 1fr) !important;
     padding: 0 !important;
   }
-
 }
 
 /* Main content styles - uncomment when needed */
@@ -403,6 +404,7 @@ section {
   overflow: hidden;
   display: inline-block;
   margin-bottom: 30px;
+  padding: 60px;
 }
 
 .project-container .image-wrapper img {
@@ -411,7 +413,6 @@ section {
   z-index: 1;
   position: relative;
   display: block;
-  padding: 60px;
 }
 
 #projects a:hover {
