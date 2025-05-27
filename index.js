@@ -40,7 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Load default section
-  loadPage("pages/home.html");
+  // loadPage("pages/home.html");
+  const initialPage = window.location.hash
+    ? window.location.hash.substring(1)
+    : "pages/home.html";
+  loadPage(initialPage);
 
   // Attach click events to nav links (use data-page attribute)
   document.querySelectorAll(".nav-link").forEach((link) => {
@@ -69,14 +73,59 @@ document.addEventListener("DOMContentLoaded", () => {
           // Step 3: Insert the new content
           content.innerHTML = html;
 
+          const previousPage = sessionStorage.getItem("currentPage");
+          const isSessionPage = previousPage === page;
+          sessionStorage.setItem("currentPage", page);
+          // If the page is the same as the previous one, skip scroll restoration
+
+          const savedScroll = sessionStorage.getItem("scrollPosition");
+          if (savedScroll) {
+            setTimeout(() => {
+              window.scrollTo(0, parseInt(savedScroll));
+            }, 10);
+          }
           // Step 4: Animate in the new content
           requestAnimationFrame(() => {
             content.classList.add("show");
 
+            // Set title based on page
+            switch (page) {
+              case "pages/home.html":
+                document.title = "Home | Diober's Portfolio";
+                break;
+              case "pages/projects.html":
+                document.title = "Projects | Diober's Portfolio";
+                break;
+              case "pages/about.html":
+                document.title = "About | Diober's Portfolio";
+                break;
+              case "pages/i-file.html":
+                document.title = "i-File Mo | Diober's Portfolio";
+                break;
+              default:
+                document.title = "Diober's Portfolio";
+            }
+
+            window.location.hash = page; // Update URL hash
+
+            // Re-attach nav-link events inside dynamically loaded content
+            document.querySelectorAll(".nav-link").forEach((link) => {
+              link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const nextPage = link.getAttribute("data-page");
+                if (nextPage) {
+                  loadPage(nextPage);
+                }
+              });
+            });
+
             // Step 5: Scroll to top after a short delay to ensure visibility
-            setTimeout(() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }, 50); // slight delay for smoother animation experience
+            const savedScroll = sessionStorage.getItem("scrollPosition");
+            if (savedScroll && !isSessionPage) {
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }, 50); // slight delay for smoother animation experience
+            }
           });
         })
         .catch(() => {
@@ -86,4 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, 500); // match your CSS transition time
   }
+});
+
+// Save scroll position before navigating away
+window.addEventListener("beforeunload", () => {
+  sessionStorage.setItem("scrollPosition", window.scrollY);
 });
