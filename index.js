@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Step 5: Scroll to top after a short delay to ensure visibility
-            const savedScroll = sessionStorage.getItem("scrollPosition");
             if (savedScroll && !isSessionPage) {
               setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
