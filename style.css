@@ -534,15 +534,12 @@ footer {
 /* Content Animation */
 /* Initial state for content: hidden and shifted */
 #content {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
 }
 
-/* Active state: fully visible and at original position */
 #content.show {
-  opacity: 1;
-  transform: translateX(0);
+    opacity: 1;
 }
 
 /* i-FIle Mo */
@@ -592,4 +589,22 @@ footer {
   position: relative;
   display: block;
   padding: 20px;
+}
+
+.projects-section {
+  margin-top: -150px !important;
+  margin-bottom: 250px !important;
+}
+
+.projects-section h2{
+  font-size: 2.5em !important;
+  margin-bottom: 20px;
+}
+
+#content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.5em;
+  margin-bottom: 250px;
 }
