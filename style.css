@@ -213,8 +213,21 @@ nav a:hover {
   #hobbies h2,
   #my-story h2,
   #exp h2,
-  #my-story h2 {
+  #my-story h2,
+  #values h2,
+  #education h2,
+  #journey h2 {
     font-size: 2em !important;
+  }
+  
+  #values {
+    margin-bottom: 25% ! important;
+  }
+
+  #values .value-item {
+    font-size: 0.8em !important;
+    margin: 0 20px;
+    margin-bottom: 20px;
   }
 
   .skills-grid {
@@ -265,6 +278,8 @@ nav a:hover {
     max-width: 100% !important;
     margin-bottom: 30px;
   }
+
+  
 }
 
 @media screen and (max-width: 480px) {
@@ -310,7 +325,11 @@ section#projects h2,
 section#skills h2,
 section#hobbies h2,
 section#my-story h2,
-section#exp h2 {
+section#exp h2,
+section#about-me h2,
+section#education h2,
+section#journey h2,
+section#values h2 {
   font-size: 4em;
   margin-bottom: 10px;
 }
@@ -488,7 +507,11 @@ section {
 }
 
 /* My Story Section */
-#my-story p {
+#my-story p,
+#about-me p,
+#education p,
+#journey p,
+#values p {
   font-size: 1.5em;
   color: var(--project-description-color);
 }
@@ -534,12 +557,12 @@ footer {
 /* Content Animation */
 /* Initial state for content: hidden and shifted */
 #content {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
 }
 
 #content.show {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* i-FIle Mo */
@@ -596,7 +619,7 @@ footer {
   margin-bottom: 250px !important;
 }
 
-.projects-section h2{
+.projects-section h2 {
   font-size: 2.5em !important;
   margin-bottom: 20px;
 }
@@ -607,4 +630,43 @@ footer {
   align-items: center;
   font-size: 2.5em;
   margin-bottom: 250px;
+}
+
+#journey ul {
+  padding: 0 30px;
+  font-size: large;
+  margin-top: 10px;
+}
+
+#journey-description {
+  margin-top: 20px;
+  font-size: 1.3em !important;
+  color: var(--project-description-color);
+}
+
+.hobbies-section {
+  margin-top: -150px !important;
+  margin-bottom: 250px !important;
+}
+
+.values-section {
+  margin-top: -150px !important;
+  margin-bottom: 250px !important;
+}
+
+#values h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.value-item {
+  font-size: 1.3em;
+  color: var(--project-description-color);
+  margin: 0 300px;
+  margin-bottom: 30px;
+}
+
+#values h3 {
+  font-size: 1.7em;
+  text-align: center;
 }
