@@ -276,6 +276,15 @@ nav a:hover {
     max-width: 100% !important;
     margin-bottom: 30px;
   }
+
+  #mini-projects h2{
+    font-size: 1.5em !important;
+  }
+
+  #mini-projects ul {
+    font-size: 1em !important;
+  }
+  
 }
 
 @media screen and (max-width: 480px) {
@@ -400,6 +409,7 @@ section {
 
 #mini-projects h2{
   font-size: 2.5em;
+  color: #333;
 }
 
 #mini-projects ul {
