@@ -398,6 +398,21 @@ section {
   margin-top: 100px;
 }
 
+#mini-projects h2{
+  font-size: 2.5em;
+}
+
+#mini-projects ul {
+  padding: 0 30px;
+  font-size: large;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-weight: bold;
+  color: var(--project-description-color);
+}
+
+
+
 #projects p {
   font-size: 1.5em;
   color: var(--project-description-color);
@@ -618,7 +633,6 @@ footer {
 
 .projects-section {
   margin-top: -150px !important;
-  margin-bottom: 250px !important;
 }
 
 .projects-section h2 {

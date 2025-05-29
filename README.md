@@ -27,4 +27,6 @@ A personal web portfolio showcasing my projects, skills, professional experience
   - Integrated dynamic routing
   - Added screenshots and detailed project description
 
+- **[May 29 2025]** Added new project: *Basic To-Do List App*
+  - A Simple web app to manage task with clean interface
 
