@@ -464,11 +464,12 @@ section {
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .material-symbols-outlined {
   color: #985efb;
+  font-size: 35px !important;
 }
 
 #projects a:hover .material-symbols-outlined {
@@ -703,4 +704,52 @@ footer {
 #values h3 {
   font-size: 1.7em;
   text-align: center;
+}
+
+
+/* Modal Image */
+
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 1001; /* Higher than nav */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: var(--hover-text-color);
+}
+
+/* Add hover effect to images that can be previewed */
+.image-wrapper img {
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper img:hover {
+  transform: scale(1.02);
 }

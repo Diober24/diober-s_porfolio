@@ -1,6 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
   const content = document.getElementById("content");
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = document.querySelector(".close-btn"); // Define closeBtn here
+
+  // When any image in the portfolio is clicked
+  document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("click", () => {
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+    });
+  });
+
+  // Close when clicking the close button
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Optional: Close when clicking outside the image
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
   // Optional: smooth scroll for specific IDs if you have those in nav links
   // If you don’t have #home-link or #contact-link in your HTML, remove these blocks.
@@ -42,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
           content.innerHTML = html;
           content.classList.add("show");
           window.currentPage = page; // Track current page
+          addModalListeners(); // Add this line to reattach modal listeners after content changes
 
           // Add event listeners to any new nav links
           const newLinks = content.querySelectorAll(".nav-link");
@@ -101,4 +125,39 @@ document.addEventListener("DOMContentLoaded", () => {
     : "pages/home.html";
   window.currentPage = null; // Initialize current page tracker
   loadPage(initialPage);
+
+  function addModalListeners() {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // Add click listeners to all images except nav/logo images
+    document.querySelectorAll('.image-wrapper img').forEach(img => {
+      img.style.cursor = 'pointer'; // Show pointer cursor on hoverable images
+      img.addEventListener('click', () => {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    // Close modal with close button
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = "none";
+    });
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === "flex") {
+        modal.style.display = "none";
+      }
+    });
+  }
 });
