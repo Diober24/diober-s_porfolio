@@ -1,49 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nav = document.querySelector("nav");
   const content = document.getElementById("content");
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImage");
-  const closeBtn = document.querySelector(".close-btn"); // Define closeBtn here
+  const closeBtn = document.querySelector(".close-btn");
 
-  // When any image in the portfolio is clicked
-  document.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("click", () => {
-      modal.style.display = "flex";
-      modalImg.src = img.src;
-    });
-  });
-
-  // Close when clicking the close button
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  // Optional: Close when clicking outside the image
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
+  // Setup static modal close handlers once globally
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => {
       modal.style.display = "none";
-    }
-  });
+    });
 
-  // Optional: smooth scroll for specific IDs if you have those in nav links
-  // If you don’t have #home-link or #contact-link in your HTML, remove these blocks.
-  const homeLink = document.getElementById("home-link");
-  if (homeLink) {
-    homeLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.style.display === "flex") {
+        modal.style.display = "none";
+      }
     });
   }
 
-  // Modify the loadPage function to prevent recursive loading
-  function loadPage(page) {
-    // Prevent loading if we're already on this page
-    if (window.currentPage === page) {
-      console.log("Already on page:", page);
-      return;
-    }
+  // Function to attach click zoom preview to project preview images
+  function attachImageModalListeners() {
+    document.querySelectorAll(".image-wrapper img").forEach((img) => {
+      img.style.cursor = "pointer";
+      img.onclick = () => {
+        if (modal && modalImg) {
+          modal.style.display = "flex";
+          modalImg.src = img.src;
+          modalImg.alt = img.alt || "Preview Image";
+        }
+      };
+    });
+  }
 
-    // First fetch the content
+  // Update active state in navbar
+  function updateActiveNavLink(page) {
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      if (link.getAttribute("data-page") === page) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  // Load subpage dynamically via fetch
+  function loadPage(page, pushHash = true) {
+    if (window.currentPage === page) return;
+
     fetch(page, {
       headers: {
         "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -52,28 +60,24 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     })
       .then((res) => {
-        console.log("Fetch response:", res.status);
         if (!res.ok) throw new Error("Page not found");
         return res.text();
       })
       .then((html) => {
-        // Start fade out
         content.classList.remove("show");
 
-        // Wait for fade out to complete before updating content
         setTimeout(() => {
           content.innerHTML = html;
           content.classList.add("show");
-          window.currentPage = page; // Track current page
-          addModalListeners(); // Add this line to reattach modal listeners after content changes
+          window.currentPage = page;
 
-          // Add event listeners to any new nav links
-          const newLinks = content.querySelectorAll(".nav-link");
-          newLinks.forEach((link) => {
+          // Re-attach modal & nav click handlers within newly loaded content
+          attachImageModalListeners();
+          content.querySelectorAll(".nav-link").forEach((link) => {
             link.addEventListener("click", handleNavClick);
           });
 
-          // Set title based on page
+          // Update Document Title
           switch (page) {
             case "pages/home.html":
               document.title = "Home | Diober's Portfolio";
@@ -91,73 +95,61 @@ document.addEventListener("DOMContentLoaded", () => {
               document.title = "Diober's Portfolio";
           }
 
-          console.log("Loading page:", page);
+          updateActiveNavLink(page);
           window.scrollTo(0, 0);
 
-          window.location.hash = page; // Update URL hash
-        }, 300); // Match this with your CSS transition duration
+          if (pushHash) {
+            window.location.hash = page;
+          }
+        }, 200);
       })
       .catch((error) => {
-        console.error("Load error:", error);
-        content.innerHTML = "<p>Page not found.</p>";
+        console.error("Error loading page:", error);
+        if (window.location.protocol === "file:") {
+          content.innerHTML = `
+            <div style="text-align: center; padding: 40px; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 16px; margin: 40px auto; max-width: 650px; color: #9b2c2c; font-family: system-ui, sans-serif; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+              <h3 style="margin-bottom: 12px; font-size: 1.4em;">⚠️ Local File Protocol Restriction (CORS)</h3>
+              <p style="font-size: 1.05em; line-height: 1.5;">Modern web browsers block <code>fetch()</code> requests when opening HTML files directly via <code>file:///</code>.</p>
+              <div style="margin-top: 20px; padding: 15px; background: #ffffff; border-radius: 10px; border: 1px solid #fed7d7; text-align: left;">
+                <p style="font-weight: bold; color: #2d3748; margin-bottom: 8px;">To view your portfolio properly:</p>
+                <p style="color: #4a5568; margin: 5px 0;">1. Start <strong>Apache</strong> in your <strong>XAMPP Control Panel</strong>.</p>
+                <p style="color: #4a5568; margin: 5px 0;">2. Open your web browser and navigate to:</p>
+                <p style="margin-top: 8px; text-align: center;"><a href="http://localhost/my-portfolio/" style="color: #935e9d; font-weight: bold; font-size: 1.2em; text-decoration: underline;">http://localhost/my-portfolio/</a></p>
+              </div>
+            </div>
+          `;
+        } else {
+          content.innerHTML = "<p style='text-align:center; padding: 40px;'>Page not found.</p>";
+        }
         content.classList.add("show");
       });
   }
 
-  // Separate the click handler function
   function handleNavClick(e) {
     e.preventDefault();
     const page = this.getAttribute("data-page");
-    console.log("Link clicked, page:", page);
     if (page) {
       loadPage(page);
     }
   }
 
-  // Add listeners to navigation links in the main nav
-  document.querySelectorAll(".nav-link").forEach((link) => {
+  // Attach click events to top navigation bar
+  document.querySelectorAll("header .nav-link").forEach((link) => {
     link.addEventListener("click", handleNavClick);
   });
 
-  // Initial page load
+  // Handle Browser Back / Forward buttons (popstate)
+  window.addEventListener("popstate", () => {
+    const pageFromHash = window.location.hash
+      ? window.location.hash.substring(1)
+      : "pages/home.html";
+    loadPage(pageFromHash, false);
+  });
+
+  // Initial page load based on current hash
   const initialPage = window.location.hash
     ? window.location.hash.substring(1)
     : "pages/home.html";
-  window.currentPage = null; // Initialize current page tracker
-  loadPage(initialPage);
-
-  function addModalListeners() {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-    const closeBtn = document.querySelector(".close-btn");
-
-    // Add click listeners to all images except nav/logo images
-    document.querySelectorAll('.image-wrapper img').forEach(img => {
-      img.style.cursor = 'pointer'; // Show pointer cursor on hoverable images
-      img.addEventListener('click', () => {
-        modal.style.display = "flex";
-        modalImg.src = img.src;
-        modalImg.alt = img.alt;
-      });
-    });
-
-    // Close modal with close button
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = "none";
-    });
-
-    // Close modal when clicking outside
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-
-    // Close modal with ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display === "flex") {
-        modal.style.display = "none";
-      }
-    });
-  }
+  window.currentPage = null;
+  loadPage(initialPage, false);
 });

@@ -1,0 +1,9 @@
+# OS & Editor generated files
+.DS_Store
+Thumbs.db
+*.psd
+*.zip
+*.tmp
+.vscode/
+.idea/
+node_modules/
